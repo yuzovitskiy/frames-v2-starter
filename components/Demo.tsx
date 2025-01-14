@@ -28,6 +28,19 @@ export default function Demo() {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-4">
+      <a
+        href="https://builders.garden"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-4"
+      >
+        <img
+          src="/images/builders-garden-logo.png"
+          alt="Builders Garden"
+          className="h-8"
+        />
+      </a>
+
       <h1 className="text-2xl font-bold">Frames v2 demo</h1>
 
       {error && <p className="text-red-500">{error}</p>}
@@ -91,6 +104,15 @@ export default function Demo() {
           </button>
         </div>
       )}
+
+      <a
+        href="https://github.com/builders-garden/frames-v2-starter"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute bottom-4 text-sm text-gray-500 hover:text-gray-400 transition-colors"
+      >
+        View on GitHub
+      </a>
     </div>
   );
 }
