@@ -28,7 +28,7 @@ export default function Demo() {
 
   return (
     <div
-      className="h-screen flex flex-col items-center justify-center gap-4"
+      className="h-screen flex flex-col items-center justify-center gap-4 p-2"
       style={{
         marginTop: safeAreaInsets.top,
         marginBottom: safeAreaInsets.bottom,
