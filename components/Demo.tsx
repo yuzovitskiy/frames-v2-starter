@@ -43,9 +43,8 @@ export default function Demo() {
 
       <h1 className="text-2xl font-bold">Frames v2 demo</h1>
 
-      <p className="text-xs text-gray-500 text-center max-w-md mb-4">
-        This demo showcases the key features and capabilities available in this
-        repository, helping developers quickly get started with Frames v2
+      <p className="text-sm text-gray-500 text-center max-w-md mb-4">
+        This demo is made for developers to quickly get started with Frames v2
         integration
       </p>
 
