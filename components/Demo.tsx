@@ -3,16 +3,19 @@
 import { useFrame } from "./context/FrameContext";
 import { useSignIn } from "@/hooks/use-sign-in";
 import { useUser } from "@/hooks/use-user-me";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useUpdateUser } from "@/hooks/use-update-user";
 
 export default function Demo() {
   const { isSDKLoaded } = useFrame();
   const { signIn, logout, isSignedIn, isLoading, error } = useSignIn();
   const { data: user, refetch: refetchUser } = useUser();
+  const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
+  const [customName, setCustomName] = useState("");
 
   useEffect(() => {
     refetchUser();
-  }, [isSignedIn]);
+  }, [isSignedIn, refetchUser]);
 
   if (!isSDKLoaded) {
     return (
@@ -41,18 +44,48 @@ export default function Demo() {
         <div className="flex flex-col items-center gap-4">
           {user && (
             <div className="text-center text-white">
-              <img 
-                src={user.avatarUrl} 
+              <img
+                src={user.avatarUrl}
                 alt={user.username}
                 className="w-16 h-16 rounded-full mx-auto mb-2"
               />
               <p className="font-medium">Welcome, {user.username}</p>
               <p className="text-gray-600">FID: {user.fid}</p>
+              <p className="text-gray-600">
+                {user.customName || "No custom name set"}
+              </p>
+
+              <div className="mt-4 flex flex-col gap-2">
+                <input
+                  type="text"
+                  value={customName}
+                  onChange={(e) => setCustomName(e.target.value)}
+                  placeholder="Enter custom name"
+                  className="px-3 py-2 rounded-lg border border-gray-300 text-black"
+                />
+                <button
+                  onClick={() => {
+                    updateUser(
+                      { customName },
+                      {
+                        onSuccess: () => {
+                          refetchUser();
+                        },
+                      }
+                    );
+                    setCustomName("");
+                  }}
+                  disabled={isUpdating || !customName}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:bg-green-300"
+                >
+                  {isUpdating ? "Updating..." : "Update Name"}
+                </button>
+              </div>
             </div>
           )}
           <button
             onClick={() => logout()}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="mt-8 px-4 py-2 bg-red-500 w-full text-white rounded-lg hover:bg-red-600 transition-colors"
           >
             Logout
           </button>

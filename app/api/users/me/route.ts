@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUser, setUser } from "@/lib/db";
+import { trackEvent } from "@/lib/posthog/server";
 
 export async function GET(req: NextRequest) {
   const fid = req.headers.get("x-user-fid");
@@ -22,6 +23,9 @@ export async function PATCH(req: NextRequest) {
   const { customName } = await req.json();
   const user = await setUser(Number(fid), {
     ...existingUser,
+    customName,
+  });
+  trackEvent(Number(fid), "user_updated", {
     customName,
   });
   return NextResponse.json(user);
