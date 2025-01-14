@@ -2,8 +2,7 @@ import { ImageResponse } from "next/og";
 import React from "react";
 
 export const dynamic = "force-dynamic";
-export const contentType = "image/png";
-export const size = {
+const size = {
   width: 1200,
   height: 800,
 };
