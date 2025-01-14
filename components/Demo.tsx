@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useUpdateUser } from "@/hooks/use-update-user";
 
 export default function Demo() {
-  const { isSDKLoaded } = useFrame();
+  const { isSDKLoaded, safeAreaInsets } = useFrame();
   const { signIn, logout, isSignedIn, isLoading, error } = useSignIn();
   const { data: user, refetch: refetchUser } = useUser();
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
@@ -27,7 +27,15 @@ export default function Demo() {
   }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-4">
+    <div
+      className="h-screen flex flex-col items-center justify-center gap-4"
+      style={{
+        marginTop: safeAreaInsets.top,
+        marginBottom: safeAreaInsets.bottom,
+        marginLeft: safeAreaInsets.left,
+        marginRight: safeAreaInsets.right,
+      }}
+    >
       <a
         href="https://builders.garden"
         target="_blank"
