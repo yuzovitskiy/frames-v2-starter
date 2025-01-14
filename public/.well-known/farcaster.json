@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjQ0NjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgxMzU4MTU1YTE1OTMwZjg5ZUJjNzg3YTM0RWI0Y2NmZDk3MjBiQzYyIn0",
+    "payload": "eyJkb21haW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ",
+    "signature": "MHhhMGJjNTc1Njc2OWNjNThkYTZjZWM3YjIxY2Y5ZDA5Yjk2MWY5NjI1NGU1MzVhMDc4YjU2NWM4NGFkYWRmMmQzMjg5ODc4NTA0YzQwMjM0OGVjZTFmZjk4NmRiZDlmZTU4NTlhMjZhYTE1Nzk1NGRiOTllNmRhZjZhYTk0ZWQ0OTFi"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Frame V2 Starter",
+    "iconUrl": "http://localhost:3000/images/icon.png",
+    "homeUrl": "http://localhost:3000",
+    "imageUrl": "http://localhost:3000/images/feed.png",
+    "buttonTitle": "Press Me",
+    "splashImageUrl": "http://localhost:3000/images/splash.png",
+    "splashBackgroundColor": "#ffffff",
+    "webhookUrl": "http://localhost:3000/api/webhook"
+  }
+}
