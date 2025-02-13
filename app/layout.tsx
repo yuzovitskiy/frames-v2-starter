@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     'fc:frame:image': `${baseUrl}/images/feed.png`,
     'fc:frame:button:1': 'Press Me',
     'fc:frame:post_url': `${baseUrl}/api/frame`,
+    'fc:frame:version': 'vNext',
   }
 };
 
