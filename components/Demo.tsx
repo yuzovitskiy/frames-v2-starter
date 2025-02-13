@@ -93,7 +93,7 @@ export default function Demo() {
               className="px-4 py-2 border rounded-lg"
             />
             <button
-              onClick={() => updateUser({ name: customName })}
+              onClick={() => updateUser({ customName })}
               disabled={isUpdating || !customName}
               className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:bg-green-300"
             >
