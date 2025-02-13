@@ -14,8 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Frame v2 Starter",
-  description: "A starter for Frame v2",
+  title: "Frames v2 demo",
+  description: "This demo is made for developers to quickly get started with Frames v2 integration",
+  openGraph: {
+    title: "Frames v2 demo",
+    description: "This demo is made for developers to quickly get started with Frames v2 integration",
+    images: ["https://placehold.co/1200x630"],
+  },
+  // Frame v2 specific meta tags
+  other: {
+    'fc:frame': 'vNext',
+    'fc:frame:image': 'https://placehold.co/1200x630',
+    'fc:frame:button:1': 'Sign in with Farcaster',
+    'fc:frame:post_url': process.env.NEXT_PUBLIC_URL || '',
+  }
 };
 
 export default function RootLayout({
