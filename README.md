@@ -41,7 +41,7 @@ yarn install
 pnpm install
 ```
 
-3. Create a `.env` file based on `.env.sample`:
+3. Creeate a `.env` file based on `.env.sample`:
 
 ```env
 NEXT_PUBLIC_URL=http://localhost:3000
