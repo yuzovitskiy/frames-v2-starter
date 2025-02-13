@@ -29,10 +29,9 @@ A full-featured starter kit for building Farcaster Frames v2 applications with N
 ```bash
 git clone https://github.com/builders-garden/frames-v2-starter
 cd frames-v2-starter
-````
+```
 
 2. Install dependencies:
-
 ```bash
 npm install
 # or
@@ -41,8 +40,7 @@ yarn install
 pnpm install
 ```
 
-3. Creeate a `.env` file based on `.env.sample`:
-
+3. Create a `.env` file based on `.env.sample`:
 ```env
 NEXT_PUBLIC_URL=http://localhost:3000
 JWT_SECRET=your-secret-key
@@ -56,7 +54,6 @@ NEXT_PUBLIC_POSTHOG_HOST=your-posthog-host
 ```
 
 4. Run the development server:
-
 ```bash
 npm run dev
 # or
@@ -68,10 +65,20 @@ pnpm dev
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Testing Your Frame
-1. Run yarn frames
+
+1. Run `yarn frames`
 2. Generate domain account association for http://localhost:3000
 3. Paste it in your manifest (farcaster.json)
 4. Debug and Test interactions from the debugger
+
+### Important Note About Frame URLs
+
+When sharing your frame in Warpcast, make sure to use the exact URL without a trailing slash:
+
+✅ Correct: `@https://your-domain.com`
+❌ Incorrect: `@https://your-domain.com/`
+
+The trailing slash can prevent Warpcast from properly detecting your frame metadata.
 
 ## Project Structure
 
