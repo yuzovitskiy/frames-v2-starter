@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-const baseUrl = isDevelopment 
-  ? process.env.NEXT_PUBLIC_URL 
-  : 'https://frames-v2-starter-pi.vercel.app';
+// const isDevelopment = process.env.NODE_ENV === 'development';
+// const baseUrl = isDevelopment 
+//   ? process.env.NEXT_PUBLIC_URL 
+//   : 'https://frames-v2-starter-pi.vercel.app';
 
 export const metadata: Metadata = {
   title: "Frame V2 Starter",
@@ -27,10 +27,9 @@ export const metadata: Metadata = {
   },
   other: {
     'fc:frame': 'vNext',
-    'fc:frame:image': `${baseUrl}/images/feed.png`,
+    'fc:frame:image': 'https://frames-v2-starter-pi.vercel.app/images/feed.png',
     'fc:frame:button:1': 'Press Me',
-    'fc:frame:post_url': `${baseUrl}/api/frame`,
-    'fc:frame:version': 'vNext',
+    'fc:frame:post_url': 'https://frames-v2-starter-pi.vercel.app/api/frame',
   }
 };
 
