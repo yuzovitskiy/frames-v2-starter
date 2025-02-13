@@ -14,19 +14,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Frames v2 demo",
-  description: "This demo is made for developers to quickly get started with Frames v2 integration",
+  title: "Frame V2 Starter",
+  description: "A starter for Frame v2",
   openGraph: {
-    title: "Frames v2 demo",
-    description: "This demo is made for developers to quickly get started with Frames v2 integration",
-    images: ["https://placehold.co/1200x630"],
+    title: "Frame V2 Starter",
+    description: "A starter for Frame v2",
   },
-  // Frame v2 specific meta tags
   other: {
-    'fc:frame': 'vNext',
-    'fc:frame:image': 'https://placehold.co/1200x630',
-    'fc:frame:button:1': 'Sign in with Farcaster',
-    'fc:frame:post_url': process.env.NEXT_PUBLIC_URL || '',
+    'fc:frame': JSON.stringify({
+      version: 'next',
+      imageUrl: 'https://frames-v2-starter-pi.vercel.app/images/feed.png',
+      button: {
+        title: 'Press Me',
+        action: {
+          type: 'launch_frame',
+          name: 'Frame V2 Starter',
+          url: 'https://frames-v2-starter-pi.vercel.app',
+          splashImageUrl: 'https://frames-v2-starter-pi.vercel.app/images/splash.png',
+          splashBackgroundColor: '#f7f7f7'
+        }
+      }
+    }),
   }
 };
 
