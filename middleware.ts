@@ -6,7 +6,12 @@ export const config = {
   matcher: ["/api/:path*"],
 };
 
-export default async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
+  // Skip auth check in development
+  if (process.env.NODE_ENV === 'development') {
+    return NextResponse.next();
+  }
+
   // Skip auth check for sign-in endpoint
   if (
     req.nextUrl.pathname === "/api/sign-in" ||

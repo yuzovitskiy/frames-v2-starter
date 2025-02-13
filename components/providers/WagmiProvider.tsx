@@ -1,22 +1,14 @@
-import { createConfig, http, WagmiProvider } from "wagmi";
-import { base } from "wagmi/chains";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { frameConnector } from "@/lib/connector";
+import { createConfig, WagmiConfig } from 'wagmi';
+import { mainnet } from 'wagmi/chains';
+import { http } from 'viem';
 
-export const config = createConfig({
-  chains: [base],
+const config = createConfig({
+  chains: [mainnet],
   transports: {
-    [base.id]: http(),
-  },
-  connectors: [frameConnector()],
+    [mainnet.id]: http()
+  }
 });
 
-const queryClient = new QueryClient();
-
-export default function Provider({ children }: { children: React.ReactNode }) {
-  return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
-  );
+export default function WagmiProvider({ children }: { children: React.ReactNode }) {
+  return <WagmiConfig config={config}>{children}</WagmiConfig>;
 }

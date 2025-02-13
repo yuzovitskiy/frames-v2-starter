@@ -12,6 +12,12 @@ export const useSignIn = () => {
 
   const signIn = useCallback(async () => {
     try {
+      // For development, mock the sign-in
+      if (process.env.NODE_ENV === 'development') {
+        localStorage.setItem('token', 'mock_token');
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
 

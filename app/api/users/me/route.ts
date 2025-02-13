@@ -3,6 +3,15 @@ import { getUser, setUser } from "@/lib/db";
 import { trackEvent } from "@/lib/posthog/server";
 
 export async function GET(req: NextRequest) {
+  // For development, return mock data
+  if (process.env.NODE_ENV === 'development') {
+    return NextResponse.json({
+      id: '1',
+      name: 'Test User',
+      // Add other mock user data as needed
+    });
+  }
+
   const fid = req.headers.get("x-user-fid");
   if (!fid) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
