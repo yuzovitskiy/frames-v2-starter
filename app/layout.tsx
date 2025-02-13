@@ -26,10 +26,20 @@ export const metadata: Metadata = {
     description: "A starter for Frame v2",
   },
   other: {
-    'fc:frame': 'vNext',
-    'fc:frame:image': 'https://frames-v2-starter-pi.vercel.app/images/feed.png',
-    'fc:frame:button:1': 'Press Me',
-    'fc:frame:post_url': 'https://frames-v2-starter-pi.vercel.app/api/frame',
+    'fc:frame': JSON.stringify({
+      version: 'next',
+      imageUrl: 'https://frames-v2-starter-pi.vercel.app/images/feed.png',
+      button: {
+        title: 'Press Me',
+        action: {
+          type: 'launch_frame',
+          name: 'Frame V2 Starter',
+          url: 'https://frames-v2-starter-pi.vercel.app',
+          splashImageUrl: 'https://frames-v2-starter-pi.vercel.app/images/splash.png',
+          splashBackgroundColor: '#f7f7f7'
+        }
+      }
+    })
   }
 };
 
