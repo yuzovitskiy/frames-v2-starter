@@ -7,11 +7,18 @@ import { useEffect, useState } from "react";
 import { useUpdateUser } from "@/hooks/use-update-user";
 
 export default function Demo() {
-  const { isSDKLoaded, safeAreaInsets } = useFrame();
-  const { signIn, logout, isSignedIn, isLoading, error } = useSignIn();
+  const { isSDKLoaded, safeAreaInsets, context, error: frameError } = useFrame();
+  const { signIn, logout, isSignedIn, isLoading, error: signInError } = useSignIn();
   const { data: user, refetch: refetchUser } = useUser();
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
   const [customName, setCustomName] = useState("");
+
+  console.log("Frame SDK loaded:", isSDKLoaded);
+  console.log("Frame context:", context);
+  console.log("Frame error:", frameError);
+  console.log("SignIn error:", signInError);
+  console.log("Current isSignedIn state:", isSignedIn);
+  console.log("Current user data:", user);
 
   useEffect(() => {
     refetchUser();
@@ -56,66 +63,50 @@ export default function Demo() {
         integration
       </p>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {signInError && <p className="text-red-500">{signInError}</p>}
 
       {!isSignedIn ? (
         <button
-          onClick={() => signIn()}
+          onClick={async () => {
+            console.log("Sign in clicked");
+            try {
+              await signIn();
+            } catch (err) {
+              console.error("Sign in error:", err);
+            }
+          }}
           disabled={isLoading}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-blue-300"
         >
           {isLoading ? "Signing in..." : "Sign in with Farcaster"}
         </button>
       ) : (
-        <div className="flex flex-col items-center gap-4">
-          {user && (
-            <div className="text-center text-white">
-              <img
-                src={user.avatarUrl}
-                alt={user.username}
-                className="w-16 h-16 rounded-full mx-auto mb-2"
-              />
-              <p className="font-medium">Welcome, {user.username}</p>
-              <p className="text-gray-600">FID: {user.fid}</p>
-              <p className="text-gray-600">
-                {user.customName || "No custom name set"}
-              </p>
-
-              <div className="mt-4 flex flex-col gap-2">
-                <input
-                  type="text"
-                  value={customName}
-                  onChange={(e) => setCustomName(e.target.value)}
-                  placeholder="Enter custom name"
-                  className="px-3 py-2 rounded-lg border border-gray-300 text-black"
-                />
-                <button
-                  onClick={() => {
-                    updateUser(
-                      { customName },
-                      {
-                        onSuccess: () => {
-                          refetchUser();
-                        },
-                      }
-                    );
-                    setCustomName("");
-                  }}
-                  disabled={isUpdating || !customName}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:bg-green-300"
-                >
-                  {isUpdating ? "Updating..." : "Update Name"}
-                </button>
-              </div>
-            </div>
-          )}
+        <>
+          <div className="flex flex-col items-center gap-2">
+            <p>FID: {user?.id}</p>
+            <p>Name: {user?.name || "No custom name set"}</p>
+            <input
+              type="text"
+              placeholder="Enter custom name"
+              value={customName}
+              onChange={(e) => setCustomName(e.target.value)}
+              className="px-4 py-2 border rounded-lg"
+            />
+            <button
+              onClick={() => updateUser({ name: customName })}
+              disabled={isUpdating || !customName}
+              className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:bg-green-300"
+            >
+              Update Name
+            </button>
+          </div>
           <button
-            onClick={() => logout()}
-            className="mt-8 px-4 py-2 bg-red-500 w-full text-white rounded-lg hover:bg-red-600 transition-colors"
+            onClick={logout}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
           >
             Logout
           </button>
-        </div>
+        </>
       )}
 
       <a

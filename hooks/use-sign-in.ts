@@ -12,29 +12,28 @@ export const useSignIn = () => {
 
   const signIn = useCallback(async () => {
     try {
-      // For development, mock the sign-in
-      if (process.env.NODE_ENV === 'development') {
-        localStorage.setItem('token', 'mock_token');
-        return;
-      }
-
+      console.log("Starting sign in...");
       setIsLoading(true);
       setError(null);
 
       if (contextError) {
+        console.log("Context error:", contextError);
         throw new Error(`SDK initialization failed: ${contextError}`);
       }
 
       if (!context) {
+        console.log("No context found");
         throw new Error("FarVille must be played from Warpcast!");
       }
 
       if (!context.user?.fid) {
+        console.log("No FID found in context:", context);
         throw new Error(
           "No FID found. Please make sure you're logged into Warpcast."
         );
       }
 
+      console.log("Calling sdk.actions.signIn...");
       const result = await sdk.actions.signIn({
         nonce: Math.random().toString(36).substring(2),
         notBefore: new Date().toISOString(),
@@ -42,6 +41,8 @@ export const useSignIn = () => {
           Date.now() + MESSAGE_EXPIRATION_TIME
         ).toISOString(),
       });
+
+      console.log("Sign in result:", result);
 
       const referrerFid =
         context.location?.type === "cast_embed"
@@ -70,8 +71,10 @@ export const useSignIn = () => {
       localStorage.setItem("token", data.token);
       setIsSignedIn(true);
       posthog.identify(context.user.fid.toString());
+      console.log("Sign in complete, isSignedIn set to true");
       return data;
     } catch (err) {
+      console.error("Sign in error in hook:", err);
       const errorMessage =
         err instanceof Error ? err.message : "Sign in failed";
       setError(errorMessage);

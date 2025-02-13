@@ -31,7 +31,7 @@ export const useApiMutation = <TData, TVariables = unknown>(
         method,
         headers: {
           "Content-Type": "application/json",
-          ...(isProtected && { Authorization: `Bearer ${token}` }),
+          ...(isProtected && token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify(resolvedBody),
       });
