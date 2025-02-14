@@ -103,3 +103,12 @@ MIT License - feel free to use this starter kit for any project.
 ## Support
 
 If you have any questions or need help, please open an issue in the repository.
+
+### Important Note About Frame URLs
+
+When sharing your frame in Warpcast, make sure to use the exact URL without a trailing slash:
+
+✅ Correct: `@https://frames-v2-starter.vercel.app`
+❌ Incorrect: `@https://frames-v2-starter.vercel.app/`
+
+The trailing slash can prevent Warpcast from properly detecting your frame metadata.
